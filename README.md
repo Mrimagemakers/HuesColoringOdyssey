@@ -3,7 +3,7 @@
 A hip-hop coloring book adventure game for the browser, phones and VR headsets, built with Three.js and WebXR.
 Based on *Hue's Got Flow: A Hip-Hop Coloring Odyssey* by Darnell Clark, PenGame Publishing.
 
-**Play:** https://mrimagemakers.github.io/HuesGotFlow/
+**Play:** https://mrimagemakers.github.io/HuesColoringOdyssey/
 
 ## What's in the game
 - 12 levels across New York and the Coloring Odyssey, with bosses in Levels 5, 8, 11 and 12 (the Eraser King)
