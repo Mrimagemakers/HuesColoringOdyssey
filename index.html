@@ -394,6 +394,10 @@ body.flowstate #hud::before{content:"";position:fixed;inset:0;pointer-events:non
 .vr-only{display:none}
 body.vr-ok .vr-only{display:inline-flex}
 .vr-card{grid-column:1/-1;border-color:var(--violet)}
+.pad-card{grid-column:1/-1;border-color:var(--gold)}.pad-card .pad-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}.pad-card .pad-note{margin-top:10px;font-size:14px;opacity:.8}
+@media (max-width:760px){.pad-card{grid-column:auto}.pad-card .pad-cols{grid-template-columns:1fr}}
+.pad-focus{outline:4px solid var(--gold)!important;outline-offset:4px;box-shadow:0 0 0 8px rgba(255,201,60,.25)!important}
+#padToast{position:fixed;left:50%;top:18px;transform:translate(-50%,-140%);z-index:9999;background:rgba(21,17,27,.94);color:#f4efe0;border:2px solid var(--gold);border-radius:14px;padding:10px 18px;font:600 15px/1.3 system-ui,sans-serif;transition:transform .35s;pointer-events:none;max-width:92vw;text-align:center}#padToast.show{transform:translate(-50%,0)}
 .vr-card h3{display:flex;gap:10px;align-items:center}
 .vr-badge{font-size:10px;background:var(--violet);color:var(--paper);padding:3px 8px;border-radius:999px;letter-spacing:1px}
 .vr-note{margin-top:12px;font-size:14px;color:var(--muted)}
@@ -524,7 +528,7 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
         <a class="btn alt" href="#trailer"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>Watch trailer</a>
         <button class="btn dark vr-only" data-vr="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18v8h-6l-3-3-3 3H3z" fill="currentColor"/></svg>Play in VR</button>
       </div>
-      <div class="hero-note"><span><b>12</b> playable levels</span><span><b>Desktop</b> keyboard + mouse</span><span><b>Mobile</b> touch controls</span><span><b>VR</b> WebXR headsets</span><span><b>4</b> difficulty tiers</span></div>
+      <div class="hero-note"><span><b>12</b> playable levels</span><span><b>Desktop</b> keyboard + mouse</span><span><b>Mobile</b> touch controls</span><span><b>VR</b> WebXR headsets</span><span><b>Gamepad</b> Xbox · PlayStation</span><span><b>4</b> difficulty tiers</span></div>
     </div>
     <div class="hero-live" aria-hidden="true">
       <div class="live-chip"><i></i>LIVE · LEVEL 01 · CONCRETE CANVAS</div>
@@ -677,6 +681,25 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
         <div class="ctl-row"><span class="keys"><kbd>PEN</kbd></span><span>Tap, then draw your gesture with one finger</span></div>
         <div class="ctl-row"><span class="keys"><kbd>BOUNCE</kbd></span><span>Flip between New York and the Odyssey</span></div>
         <div class="ctl-row"><span class="keys"><kbd>SHIELD</kbd><kbd>TIME</kbd><kbd>BUILD</kbd></span><span>Special powers appear as you unlock them. Hold JUMP in the air to glide or fly</span></div>
+      </div>
+      <div class="ctl-card pad-card">
+        <h3>XBOX / PLAYSTATION CONTROLLER</h3>
+        <div class="pad-cols"><div>
+        <div class="ctl-row"><span class="keys"><kbd>LEFT STICK</kbd></span><span>Move · click the stick (L3) to toggle sprint</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>RIGHT STICK</kbd></span><span>Look around (turn in VR) · click (R3) for Dimension Dash</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>A</kbd><kbd>&#x2715;</kbd></span><span>Jump · double jump · hold to glide or fly</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>RT</kbd><kbd>R2</kbd></span><span>Ink Shot</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>LT</kbd><kbd>L2</kbd></span><span>Hold and draw with the Golden Pen using the right stick</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>X</kbd><kbd>&#x25A1;</kbd></span><span>Hold to tag walls, fix fuses and pick things up</span></div>
+        </div><div>
+        <div class="ctl-row"><span class="keys"><kbd>B</kbd><kbd>&#x25CB;</kbd></span><span>Dimension Bounce</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>Y</kbd><kbd>&#x25B3;</kbd></span><span>Use your selected special power</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>LB</kbd><kbd>RB</kbd></span><span>Pick the special power (L1 / R1 on PlayStation)</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>D-PAD</kbd></span><span>&#x2191; Sketch Shield · &#x2193; Time Scratch · &#x2190; summon Brush · &#x2192; summon Dot</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>MENU</kbd><kbd>OPTIONS</kbd></span><span>Pause · VIEW / SHARE mutes (hold it for 1.5 s to leave VR)</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>MENUS</kbd></span><span>D-pad or left stick to move between buttons, A / &#x2715; to choose, B / &#x25CB; to go back</span></div>
+        </div></div>
+        <p class="pad-note">Pair the controller with Bluetooth or plug it in with USB, then press any button. Works in Chrome, Edge, Safari and Firefox on computers, phones and tablets, and in headset browsers that support controllers (such as Meta Quest Browser). In a headset, press Play in VR with your hand or headset controller first, then pick up the gamepad.</p>
       </div>
       <div class="ctl-card vr-card">
         <h3>VR HEADSET <span class="vr-badge">WEBXR</span></h3>
@@ -879,7 +902,7 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
     <div class="extras-box"><div class="kicker">Extras &amp; side puzzles</div><div class="extrasList"></div></div>
     <div class="diff-pick sm"><div class="diff-head"><span class="kicker">Difficulty</span><b class="diffName">INK</b></div><div class="diffBtns"></div><p class="diffBlurb"></p></div>
     <div class="row lvl-jump"><button class="btn sm alt" data-jump="0">1</button><button class="btn sm alt" data-jump="1">2</button><button class="btn sm alt" data-jump="2">3</button><button class="btn sm alt" data-jump="3">4</button><button class="btn sm alt" data-jump="4">5</button><button class="btn sm alt" data-jump="5">6</button><button class="btn sm alt" data-jump="6">7</button><button class="btn sm alt" data-jump="7">8</button><button class="btn sm alt" data-jump="8">9</button><button class="btn sm alt" data-jump="9">10</button><button class="btn sm alt" data-jump="10">11</button><button class="btn sm alt" data-jump="11">12</button></div><div class="row"><button class="btn sm alt muteBtn">SOUND: ON</button></div>
-    <div class="keys-list"><span><b>WASD</b> move</span><span><b>SPACE</b> jump · double jump</span><span><b>SHIFT</b> sprint</span><span><b>LMB / F</b> Ink Shot</span><span><b>E</b> hold to tag / use</span><span><b>RMB / C</b> draw with the pen</span><span><b>Q</b> Dimension Bounce</span><span><b>R</b> Sketch Shield (L5)</span><span><b>X</b> Time Scratch (L6)</span><span><b>V</b> Graffiti Construct (L7)</span><span><b>B</b> Beat Blast (L8)</span><span><b>Z</b> Flow State (L9)</span><span><b>SHIFT+Q</b> Dimension Dash (L10)</span><span><b>HOLD SPACE</b> glide (Hue Lv 2)</span><span><b>SPACE ×4</b> fly · hold to climb (Lv 5)</span><span><b>T</b> Paint Tornado (Lv 4)</span><span><b>H</b> Color Comet (Lv 6)</span><span><b>K</b> Crew Combo (Lv 8)</span><span><b>1 / 2</b> summon Brush / Dot · again = special</span><span><b>Y</b> World Painter (L11)</span><span><b>DRAW X</b> break ink barriers</span><span><b>M</b> mute</span></div>
+    <div class="keys-list"><span><b>WASD</b> move</span><span><b>SPACE</b> jump · double jump</span><span><b>SHIFT</b> sprint</span><span><b>LMB / F</b> Ink Shot</span><span><b>E</b> hold to tag / use</span><span><b>RMB / C</b> draw with the pen</span><span><b>Q</b> Dimension Bounce</span><span><b>R</b> Sketch Shield (L5)</span><span><b>X</b> Time Scratch (L6)</span><span><b>V</b> Graffiti Construct (L7)</span><span><b>B</b> Beat Blast (L8)</span><span><b>Z</b> Flow State (L9)</span><span><b>SHIFT+Q</b> Dimension Dash (L10)</span><span><b>HOLD SPACE</b> glide (Hue Lv 2)</span><span><b>SPACE ×4</b> fly · hold to climb (Lv 5)</span><span><b>T</b> Paint Tornado (Lv 4)</span><span><b>H</b> Color Comet (Lv 6)</span><span><b>K</b> Crew Combo (Lv 8)</span><span><b>1 / 2</b> summon Brush / Dot · again = special</span><span><b>Y</b> World Painter (L11)</span><span><b>DRAW X</b> break ink barriers</span><span><b>M</b> mute</span><span><b>CONTROLLER</b> sticks move / look · A&#x2715; jump · RT ink · LT pen · X&#x25A1; use · B&#x25CB; bounce · Y&#x25B3; power · LB/RB pick power</span></div>
     <div class="row"><button class="btn sm vr-only" data-vr="current">Continue in VR</button><button class="btn sm dark vr-only vrComfortBtn" data-comfort>VR: HIGH COMFORT</button><button class="btn sm alt" data-studio>Painter Studio</button><button class="btn sm dark" id="quitBtn">Quit to site</button></div>
   </div></div>
 
@@ -5795,7 +5818,9 @@ const Game = (() => {
   let useHeld = false, touchUse = false, fireHeld = false, jumpPressed = false;
   const touch = { move: { id: null, ox: 0, oy: 0, x: 0, y: 0 }, look: { id: null, x: 0, y: 0 }, penDraw: null };
   const moveIn = { x: 0, y: 0 };
+  let padOn = false; const pad = { x: 0, y: 0, jump: false, fire: false, use: false, sprint: false, kind: 'xbox' };
   addEventListener('keydown', e => {
+    if (!e.repeat) padOn = false;
     if (state === 'attract' || state === 'studio' || e.target.tagName === 'INPUT') return;
     if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) e.preventDefault();
     if (e.repeat) return;
@@ -5817,7 +5842,7 @@ const Game = (() => {
     else if (state === 'playing') hud.lock.hidden = false;
   }
   function requestLock() {
-    if (IS_TOUCH) return;
+    if (IS_TOUCH || padOn) return;
     try {
       const p = canvas.requestPointerLock && canvas.requestPointerLock();
       if (p && p.catch) p.catch(lockFailed);
@@ -5828,7 +5853,7 @@ const Game = (() => {
   document.addEventListener('pointerlockchange', () => {
     locked = document.pointerLockElement === canvas;
     if (locked) { dragLook = false; lockFails = 0; hud.lock.hidden = true; }
-    else if (state === 'playing' && !IS_TOUCH && !dragLook) { if (!pen.active) togglePause(true); }
+    else if (state === 'playing' && !IS_TOUCH && !dragLook && !padOn) { if (!pen.active) togglePause(true); }
   });
   document.addEventListener('pointerlockerror', lockFailed);
   let dragStart = null, dragMoved = false;
@@ -5836,6 +5861,7 @@ const Game = (() => {
   $('#hud').addEventListener('contextmenu', e => e.preventDefault());
   canvas.addEventListener('mousedown', e => {
     if (state !== 'playing' || IS_TOUCH) return;
+    if (padOn) { padOn = false; hud.lock.hidden = true; }
     if (!locked && !dragLook) { requestLock(); return; }
     if (e.button === 0) { mouseL = true; dragStart = { x: e.clientX, y: e.clientY }; dragMoved = false; if (locked) fireHeld = true; }
     if (e.button === 2) { mouseR = true; startPen(e); }
@@ -6095,7 +6121,7 @@ const Game = (() => {
     state = 'playing';
     loadLevel(lvl);
     hue.can.visible = !unlocked.pen; hue.pen.visible = unlocked.pen; hud.penHelp.hidden = !unlocked.pen;
-    if (!IS_TOUCH) { hud.lock.hidden = false; requestLock(); }
+    if (!IS_TOUCH && !padOn) { hud.lock.hidden = false; requestLock(); }
     scrollTo(0, 0); resize();
   };
   G.quit = () => {
@@ -6208,13 +6234,14 @@ const Game = (() => {
     let iz = (keys.KeyS || keys.ArrowDown ? 1 : 0) - (keys.KeyW || keys.ArrowUp ? 1 : 0);
     if (touch.move.id !== null) { const dx = touch.move.x - touch.move.ox, dy = touch.move.y - touch.move.oy; const l = Math.hypot(dx, dy), m = Math.min(1, l / 55); if (l > 6) { ix = dx / l * m; iz = dy / l * m; } }
     if (VR.on && (Math.abs(VR.move.x) > 0.15 || Math.abs(VR.move.y) > 0.15)) { ix = VR.move.x; iz = VR.move.y; }
+    if (Math.hypot(pad.x, pad.y) > 0.01) { ix = pad.x; iz = pad.y; }
     moveIn.x = ix; moveIn.y = iz;
     const len = Math.hypot(ix, iz);
-    const sprint = keys.ShiftLeft || keys.ShiftRight || (touch.move.id !== null && len > 0.95);
+    const sprint = keys.ShiftLeft || keys.ShiftRight || (touch.move.id !== null && len > 0.95) || (pad.sprint && len > 0.05);
     let sp = (sprint ? 10.2 : 6.6) * Math.min(1, len) * (flowT > 0 ? 1.35 : 1) * (prog.flying ? (prog.rank >= 9 ? 1.7 : 1.4) : prog.glide > 0.3 ? 1.15 : 1);
     if (VR.on) {
       // VR: constant, gentler speeds (no auto-sprint); airborne keeps run speed so gaps stay clearable
-      const cf = VR_COMFORT[VR.comfort]; const run = VR.sprint || !p.onGround;
+      const cf = VR_COMFORT[VR.comfort]; const run = VR.sprint || pad.sprint || !p.onGround;
       sp = (run ? cf.run : cf.walk) * Math.min(1, len) * (flowT > 0 ? 1.15 : 1);
     }
     const fx = -Math.sin(cam.yaw), fz = -Math.cos(cam.yaw), rx = Math.cos(cam.yaw), rz = -Math.sin(cam.yaw);
@@ -6231,7 +6258,7 @@ const Game = (() => {
       else if (prog.rank >= 5 && !prog.flying && prog.wing > 0.4) { prog.flying = true; p.buffer = 0; p.vel.y = Math.max(p.vel.y, 4); Audio.play('power'); Particles.burst(p.pos.clone().setY(p.pos.y + 1.2), 30, PAINT_COLS, 6, 0.35, 0.6, 1, 0.4, 2); }
     }
     // flight (Rainbow Wings), glide, Color Comet
-    const holdJump = !!keys.Space;
+    const holdJump = !!keys.Space || pad.jump;
     if (p.onGround) { prog.flying = false; prog.wing = Math.min(wingMax(), prog.wing + dt * 1.2); }
     if (prog.flying) {
       if (holdJump) { p.vel.y = damp(p.vel.y, prog.rank >= 9 ? 7.5 : 6, 6, dt); prog.wing -= dt; }
@@ -6240,7 +6267,7 @@ const Game = (() => {
     } else if (!p.onGround && holdJump && prog.rank >= 2 && p.vel.y < 0 && !prog.cometDive) p.vel.y = Math.max(p.vel.y, -2.4); // glide
     prog.glide = damp(prog.glide, (prog.flying ? 1 : (!p.onGround && holdJump && prog.rank >= 2 && p.vel.y <= -0.5 ? 0.6 : 0)), 8, dt);
     if (prog.cometT > 0) { prog.cometT -= dt; if (prog.cometT <= 0) { prog.cometDive = true; p.vel.y = -34; } }
-    if (!VR.on && !prog.flying && !keys.Space && p.vel.y > 3 && !p.onGround) p.vel.y -= 30 * dt; // variable jump height (flat arcs in VR: no sudden cut)
+    if (!VR.on && !prog.flying && !keys.Space && !pad.jump && p.vel.y > 3 && !p.onGround) p.vel.y -= 30 * dt; // variable jump height (flat arcs in VR: no sudden cut)
     p.vel.y -= 24 * dt; p.vel.y = Math.max(p.vel.y, -40);
     p.dashing = dashT > 0;
     if (dashT > 0) { dashT -= dt; p.vel.x = dashDir.x * 42; p.vel.z = dashDir.z * 42; p.vel.y = Math.max(p.vel.y, 0); for (let k = 0; k < 4; k++) Particles.emit(p.pos.clone().add(V3(rand(-.3, .3), rand(0.2, 1.7), rand(-.3, .3))), V3(0, 0, 0), pick([PAL.magenta, PAL.cyan, PAL.violet]), 0.35, 0.35, 0, 1.8); if (dashT <= 0) { p.vel.x *= 0.25; p.vel.z *= 0.25; } }
@@ -6265,7 +6292,7 @@ const Game = (() => {
     hue.root.position.copy(p.pos); hue.root.rotation.y = p.face;
     poseHue(dt, hSpeed, curInteract && useHeld, !p.onGround);
     // interactions
-    useHeld = !!keys.KeyE || touchUse || VR.use;
+    useHeld = !!keys.KeyE || touchUse || VR.use || pad.use;
     curInteract = null; let bestD = 1e9;
     for (const it of L.interacts) {
       if (it.done || !(it.dim === 'both' || it.dim === world.dim)) continue;
@@ -6273,7 +6300,7 @@ const Game = (() => {
       if (d < it.r && d < bestD && it.cond()) { bestD = d; curInteract = it; }
     }
     if (curInteract) {
-      hud.prompt.hidden = false; hud.promptKey.textContent = IS_TOUCH ? 'USE' : 'E'; hud.promptText.textContent = (useHeld ? '' : 'Hold · ') + curInteract.label;
+      hud.prompt.hidden = false; hud.promptKey.textContent = padOn ? (pad.kind === 'ps' ? '\u25A1' : 'X') : IS_TOUCH ? 'USE' : 'E'; hud.promptText.textContent = (useHeld ? '' : 'Hold · ') + curInteract.label;
       if (useHeld) {
         curInteract.prog = Math.min(1, curInteract.prog + dt / curInteract.hold);
         curInteract.progress && curInteract.progress(curInteract.prog);
@@ -6304,6 +6331,7 @@ const Game = (() => {
     // firing
     shootCD -= dt; shootFace -= dt;
     if ((fireHeld || keys.KeyF) && !pen.active) shoot();
+    if (pad.fire && !pen.active) { if (VR.on) { camera.getWorldPosition(_padP); camera.getWorldDirection(_padD); shoot(_padP.addScaledVector(_padD, 0.3), _padD); } else shoot(); }
   }
 
   function cometImpact() {
@@ -6386,6 +6414,184 @@ const Game = (() => {
     document.body.classList.toggle('slowmo', slowT > 0); document.body.classList.toggle('flowstate', flowT > 0);
   }
 
+  /* ---------------- gamepad: Xbox / PlayStation / any standard controller ---------------- */
+  // Standard mapping: 0 A/✕ 1 B/○ 2 X/□ 3 Y/△ 4 LB/L1 5 RB/R1 6 LT/L2 7 RT/R2 8 View/Share 9 Menu/Options
+  // 10 L3 11 R3 12-15 D-pad up/down/left/right. Polled every frame on the page and inside WebXR sessions.
+  const _padP = new THREE.Vector3(), _padD = new THREE.Vector3();
+  const padPrev = new Array(17).fill(false); let padNow = new Array(17).fill(false);
+  let padAxes = [0, 0, 0, 0], padNav = { dir: null, t: 0 }, padFocus = null, padViewHold = 0, padSnapCD = 0;
+  let padVRDraw = null, padNames = {};
+  const padToastEl = document.createElement('div'); padToastEl.id = 'padToast'; document.body.appendChild(padToastEl);
+  let padToastT = 0;
+  function padToast(msg, sec = 3.2) { padToastEl.textContent = msg; padToastEl.classList.add('show'); padToastT = sec; if (VR.on) vrToast(msg, 'hint'); }
+  function padKind(id) { id = (id || '').toLowerCase(); if (/045e|xbox|xinput/.test(id)) return 'xbox'; if (/054c|playstation|dualsense|dualshock|wireless controller/.test(id)) return 'ps'; return 'xbox'; }
+  function padList() {
+    let list = [];
+    try { list = [...(navigator.getGamepads ? navigator.getGamepads() : [])]; } catch (e) { }
+    return list.filter(g => g && g.connected && g.mapping !== 'xr-standard' && !/oculus|openxr|meta quest touch|pico|vive|index controller|wmr/i.test(g.id));
+  }
+  addEventListener('gamepadconnected', e => {
+    const g = e.gamepad; if (!g || g.mapping === 'xr-standard') return;
+    const k = padKind(g.id); padNames[g.index] = k;
+    padToast((k === 'ps' ? 'PlayStation' : 'Xbox') + ' controller connected. ' + (state === 'attract' ? 'D-pad to pick a button, ' + (k === 'ps' ? '✕' : 'A') + ' to choose.' : 'Press MENU / OPTIONS to pause.'));
+  });
+  addEventListener('gamepaddisconnected', e => { if (padNames[e.gamepad.index]) { delete padNames[e.gamepad.index]; padToast('Controller disconnected'); pad.x = pad.y = 0; pad.jump = pad.fire = pad.use = false; } });
+  const dz = (x, y, d = 0.18) => { const l = Math.hypot(x, y); if (l < d) return [0, 0]; const s = Math.min(1, (l - d) / (1 - d)) / l; return [x * s, y * s]; };
+  const pPressed = i => padNow[i], pEdge = i => padNow[i] && !padPrev[i], pUp = i => !padNow[i] && padPrev[i];
+  function padRumble(ms = 60, strong = 0.4) {
+    for (const g of padList()) { try { g.vibrationActuator && g.vibrationActuator.playEffect && g.vibrationActuator.playEffect('dual-rumble', { duration: ms, strongMagnitude: strong, weakMagnitude: strong * 0.6 }); } catch (e) { } }
+  }
+  G.padRumble = padRumble;
+  function cycleSpecial(step) {
+    const specs = SPECIALS.filter(k => unlocked[k]);
+    if (!specs.length) { G.toast('NO SPECIAL POWERS YET'); return; }
+    VR.sel = ((VR.sel + step) % specs.length + specs.length) % specs.length;
+    const name = POWERS.find(p => p[0] === specs[VR.sel])?.[2] || specs[VR.sel];
+    G.toast('POWER: ' + String(name).toUpperCase()); if (VR.on) vrToast(name);
+  }
+  function selSpecial() { const specs = SPECIALS.filter(k => unlocked[k]); if (specs.length) useSpecial(specs[VR.sel % specs.length]); else G.toast('NO SPECIAL POWERS YET'); }
+
+  // ---- menu navigation (site page, pause, level complete, lightbox)
+  function padVisible(el) {
+    if (el.closest('[hidden]') || el.disabled) return false;
+    const r = el.getBoundingClientRect(); if (r.width < 4 || r.height < 4) return false;
+    const cs = getComputedStyle(el); return cs.visibility !== 'hidden' && cs.display !== 'none' && +cs.opacity > 0.05;
+  }
+  function padScope() {
+    const lb = document.getElementById('lightbox'); if (lb && !lb.hidden) return lb;
+    for (const id of ['pause', 'complete', 'lockOverlay']) { const o = document.getElementById(id); if (o && !o.hidden) return o; }
+    return document;
+  }
+  function padCandidates() {
+    return [...padScope().querySelectorAll('button, a[href], [data-lvl], [data-level], [role="button"], select, input[type="range"], input[type="checkbox"]')]
+      .filter(el => !el.closest('#touch') && padVisible(el));
+  }
+  function setPadFocus(el) {
+    if (padFocus) padFocus.classList.remove('pad-focus');
+    padFocus = el; if (!el) return;
+    el.classList.add('pad-focus'); try { el.focus({ preventScroll: true }); } catch (e) { }
+    const r = el.getBoundingClientRect();
+    if (r.top < 70 || r.bottom > innerHeight - 40) el.scrollIntoView({ block: 'center', behavior: 'smooth' });
+  }
+  function padMove(dir) {
+    const els = padCandidates(); if (!els.length) return;
+    if (!padFocus || !els.includes(padFocus)) {
+      // first visible button in view, top-left first
+      const inView = els.filter(e => { const r = e.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; });
+      const pool = inView.length ? inView : els;
+      pool.sort((a, b) => { const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect(); return (ra.top - rb.top) || (ra.left - rb.left); });
+      setPadFocus(pool[0]); return;
+    }
+    const a = padFocus.getBoundingClientRect(), ax = a.left + a.width / 2, ay = a.top + a.height / 2;
+    let best = null, bs = 1e9;
+    for (const el of els) {
+      if (el === padFocus) continue;
+      const r = el.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 2, dx = x - ax, dy = y - ay;
+      let main, side;
+      if (dir === 'up') { if (r.bottom > a.top + 2) continue; main = -dy; side = Math.abs(dx); }
+      else if (dir === 'down') { if (r.top < a.bottom - 2) continue; main = dy; side = Math.abs(dx); }
+      else if (dir === 'left') { if (r.right > a.left + 2) continue; main = -dx; side = Math.abs(dy); }
+      else { if (r.left < a.right - 2) continue; main = dx; side = Math.abs(dy); }
+      const sc = main + side * 2.2; if (sc < bs) { bs = sc; best = el; }
+    }
+    if (best) setPadFocus(best);
+    else if (dir === 'up' || dir === 'down') scrollBy({ top: (dir === 'up' ? -1 : 1) * innerHeight * 0.5, behavior: 'smooth' });
+  }
+  function padBack() {
+    const lb = document.getElementById('lightbox'); if (lb && !lb.hidden) { lb.hidden = true; return; }
+    if (state === 'paused') { togglePause(); return; }
+    if (state === 'studio') { G.exitStudio && G.exitStudio(); return; }
+    if (padFocus) setPadFocus(null);
+  }
+  function padMenus(dt) {
+    let dir = null; const [lx, ly] = dz(padAxes[0], padAxes[1], 0.5);
+    if (pPressed(12) || ly < -0.5) dir = 'up'; else if (pPressed(13) || ly > 0.5) dir = 'down';
+    else if (pPressed(14) || lx < -0.5) dir = 'left'; else if (pPressed(15) || lx > 0.5) dir = 'right';
+    if (dir) { if (dir !== padNav.dir) { padNav.dir = dir; padNav.t = 0.38; padMove(dir); } else if ((padNav.t -= dt) <= 0) { padNav.t = 0.14; padMove(dir); } }
+    else padNav.dir = null;
+    if (pEdge(0)) { if (padFocus && padCandidates().includes(padFocus)) { const el = padFocus; if (el.tagName === 'INPUT' && el.type === 'checkbox') el.checked = !el.checked, el.dispatchEvent(new Event('change', { bubbles: true })); else el.click(); } else padMove('down'); }
+    if (pEdge(1)) padBack();
+    if (pEdge(9) && state === 'paused') togglePause();
+    const [, ry] = dz(padAxes[2], padAxes[3], 0.25); if (ry) scrollBy(0, ry * 1300 * dt);
+  }
+
+  // ---- gameplay
+  function padGame(dt) {
+    const [lx, ly] = dz(padAxes[0], padAxes[1]); const [rx, ry] = dz(padAxes[2], padAxes[3]);
+    pad.x = lx; pad.y = ly;
+    if (Math.hypot(lx, ly) < 0.1 && pad.sprint && player.onGround) { pad.sprintIdle = (pad.sprintIdle || 0) + dt; if (pad.sprintIdle > 0.6) pad.sprint = false; } else pad.sprintIdle = 0;
+    if (pEdge(10)) { pad.sprint = !pad.sprint; if (VR.on) vrToast(pad.sprint ? 'SPRINT ON' : 'SPRINT OFF'); }
+    pad.jump = pPressed(0); if (pEdge(0)) jumpPressed = true;
+    pad.use = pPressed(2);
+    pad.fire = pPressed(7);
+    if (pEdge(1)) bounce();
+    if (pEdge(11) && unlocked.dash) useSpecial('dash');
+    if (pEdge(3)) selSpecial();
+    if (pEdge(4)) cycleSpecial(-1); if (pEdge(5)) cycleSpecial(1);
+    if (pEdge(12)) useSpecial('shield'); if (pEdge(13)) useSpecial('scratch');
+    if (pEdge(14)) useSpecial('brush'); if (pEdge(15)) useSpecial('dot');
+    if (VR.on) {
+      // right stick turns the VR rig (snap or smooth, following the comfort setting)
+      const cf = VR_COMFORT[VR.comfort]; padSnapCD -= dt; VR.padTurn = 0;
+      if (cf.snap) { if (Math.abs(rx) > 0.7 && padSnapCD <= 0) { VR.yaw -= Math.sign(rx) * cf.snap; padSnapCD = 0.35; VR.blink = Math.max(VR.blink, cf.vig ? 0.9 : 0.5); } if (Math.abs(rx) < 0.3) padSnapCD = Math.min(padSnapCD, 0); }
+      else if (Math.abs(rx) > 0.05) { const r = -rx * 2.2; VR.yaw += r * dt; VR.padTurn = Math.abs(r); }
+      padVRPen(dt, rx, ry);
+    } else if (pen.active) {
+      virt.x = clamp(virt.x + rx * 950 * dt, 0, innerWidth); virt.y = clamp(virt.y + ry * 950 * dt, 0, innerHeight);
+      if (rx || ry) penPoint(virt.x, virt.y);
+    } else if (rx || ry) look(rx * Math.abs(rx) * 1150 * dt, ry * Math.abs(ry) * 760 * dt);
+    if (!VR.on) {
+      if (pEdge(6)) { startPen(); if (pen.active) penPoint(virt.x, virt.y, true); }
+      if (pUp(6) && pen.active) endPen();
+    }
+  }
+  function padVRPen(dt, rx, ry) {
+    if (pEdge(6) && unlocked.pen && !VR.draw) {
+      camera.getWorldPosition(_padP); camera.getWorldDirection(_padD);
+      const q = camera.getWorldQuaternion(new THREE.Quaternion());
+      padVRDraw = { o: _padP.clone().addScaledVector(_padD, 1.1), r: V3(1, 0, 0).applyQuaternion(q), u: V3(0, 1, 0).applyQuaternion(q), x: 0, y: 0, flat: [{ x: 0, y: 0 }], world: [] };
+      pen.active = true; Audio.penHum(true, 2);
+    } else if (pEdge(6) && !unlocked.pen) vrToast('YOU NEED THE GOLDEN PEN', 'warn');
+    if (padVRDraw && pPressed(6)) {
+      const d = padVRDraw; d.x += rx * 650 * dt; d.y += ry * 650 * dt;
+      const last = d.flat[d.flat.length - 1]; if (Math.hypot(d.x - last.x, d.y - last.y) > 3) d.flat.push({ x: d.x, y: d.y });
+      d.world = d.flat.map(p => d.o.clone().addScaledVector(d.r, p.x / 900).addScaledVector(d.u, -p.y / 900));
+      if (trail && d.world.length > 1) { trail.geometry.setFromPoints(d.world); trail.visible = true; }
+    } else if (padVRDraw) {
+      const d = padVRDraw; padVRDraw = null; pen.active = false; Audio.penHum(false);
+      if (d.flat.length > 4) { castGesture(Gesture.classify(d.flat)); if (pen.resultT > 0) vrToast(pen.result, pen.result.includes('·') ? 'big' : 'warn'); }
+      setTimeout(() => { if (trail) trail.visible = false; }, 500);
+    }
+  }
+
+  function padPoll(dt) {
+    if (padToastT > 0 && (padToastT -= dt) <= 0) padToastEl.classList.remove('show');
+    const list = padList(); if (!list.length) { if (pad.x || pad.y || pad.jump || pad.fire || pad.use) { pad.x = pad.y = 0; pad.jump = pad.fire = pad.use = false; } padPrev.fill(false); padNow.fill(false); return; }
+    // merge every connected pad, so a second controller (or a remapped one) still works
+    const now = new Array(17).fill(false), ax = [0, 0, 0, 0];
+    for (const g of list) {
+      g.buttons.forEach((b, i) => { if (i < 17 && b && (b.pressed || b.value > (i === 6 || i === 7 ? 0.35 : 0.5))) now[i] = true; });
+      for (let i = 0; i < 4; i++) { const v = g.axes[i] || 0; if (Math.abs(v) > Math.abs(ax[i])) ax[i] = v; }
+      pad.kind = padNames[g.index] || padKind(g.id);
+    }
+    for (let i = 0; i < 17; i++) padPrev[i] = padNow[i]; padNow = now; padAxes = ax;
+    const active = now.some(Boolean) || Math.hypot(ax[0], ax[1]) > 0.35 || Math.hypot(ax[2], ax[3]) > 0.35;
+    if (active && !padOn) { padOn = true; if (state === 'playing') { hud.lock.hidden = true; if (document.pointerLockElement) document.exitPointerLock(); } }
+    if (!padOn) return;
+    // VIEW / SHARE: tap = mute, hold 1.5 s in VR = leave VR
+    if (pPressed(8)) { padViewHold += dt; if (VR.on && padViewHold > 1.5) { padViewHold = -99; renderer.xr.getSession()?.end(); } }
+    else { if (padViewHold > 0 && padViewHold < 0.5) toggleMute(); padViewHold = 0; }
+    if (state === 'playing' && !player.dead) {
+      if (padFocus) setPadFocus(null);
+      if (pEdge(9)) { togglePause(); if (VR.on) vrToast('PAUSED · MENU / OPTIONS to resume · hold VIEW to leave VR', 'hint'); pad.x = pad.y = 0; pad.jump = pad.fire = pad.use = false; return; }
+      padGame(dt);
+    } else {
+      pad.x = pad.y = 0; pad.jump = pad.fire = pad.use = false;
+      if (VR.on) { if (pEdge(9) || pEdge(1)) { if (state === 'paused') { togglePause(); vrToast('GO!'); } } return; }
+      if (state !== 'dead') padMenus(dt);
+    }
+  }
+
   /* ---------------- main loop ---------------- */
   const clock = new THREE.Clock();
   let heroVisible = true, frames = 0;
@@ -6393,6 +6599,7 @@ const Game = (() => {
   heroObs.observe($('#hero'));
   function frame() {
     const dt = Math.min(clock.getDelta(), 0.05);
+    padPoll(dt);
     if (renderer.xr.isPresenting) { tick(dt); renderer.render(scene, camera); return; }
     const inGame = state !== 'attract';
     if (!inGame && !heroVisible) return;
@@ -6645,7 +6852,7 @@ const Game = (() => {
   function vrComfortFx(dt) {
     const cf = VR_COMFORT[VR.comfort], p = player;
     const hs = Math.hypot(p.vel.x, p.vel.z);
-    let want = clamp(hs / 5, 0, 1) * 0.8 + (p.onGround ? 0 : 0.45) + Math.min(1, VR.turnRate / 2) * 0.6 + (p.dashing ? 1 : 0);
+    let want = clamp(hs / 5, 0, 1) * 0.8 + (p.onGround ? 0 : 0.45) + Math.min(1, Math.max(VR.turnRate, VR.padTurn || 0) / 2) * 0.6 + (p.dashing ? 1 : 0);
     want = clamp(want, 0, 1) * cf.vig;
     VR.vig += (want - VR.vig) * (1 - Math.exp(-(want > VR.vig ? 10 : 4) * dt));
     VR.blink = Math.max(0, VR.blink - dt * 6);
