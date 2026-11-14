@@ -396,6 +396,24 @@ body.vr-ok .vr-only{display:inline-flex}
 .vr-card{grid-column:1/-1;border-color:var(--violet)}
 .pad-card{grid-column:1/-1;border-color:var(--gold)}.pad-card .pad-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}.pad-card .pad-note{margin-top:10px;font-size:14px;opacity:.8}
 @media (max-width:760px){.pad-card{grid-column:auto}.pad-card .pad-cols{grid-template-columns:1fr}}
+.cb-only{display:none}body.cb-ok .cb-only{display:inline-flex}
+#cbUI{display:none;position:fixed;inset:0;z-index:10000;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+body.cardboard #cbUI{display:block}
+html:has(body.cardboard),body.cardboard{overflow:hidden!important}
+body.cardboard>*:not(#world):not(#cbUI){visibility:hidden!important}
+body.cardboard #world{visibility:visible!important;z-index:9999;opacity:1!important}
+#cbUI .cb-mid{position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:#000}
+#cbUI .cb-x{position:absolute;left:50%;top:calc(env(safe-area-inset-top,0px) + 8px);transform:translateX(-50%);background:rgba(21,17,27,.75);color:#f4efe0;border:1px solid #ffc93c;border-radius:999px;font:700 12px/1 system-ui,sans-serif;letter-spacing:1px;padding:7px 12px;cursor:pointer}
+#cbUI .cb-rot{display:none;position:absolute;inset:0;background:#15111b;color:#f4efe0;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;padding:24px;font:600 16px/1.4 system-ui,sans-serif}
+#cbUI .cb-rot b{font:400 26px/1.1 Bungee,Impact,sans-serif;color:#ffc93c}
+#cbUI .cb-rot::before{content:"";width:58px;height:96px;border:4px solid #ffc93c;border-radius:12px;animation:cbRot 2s ease-in-out infinite}
+@keyframes cbRot{0%,30%{transform:rotate(0)}60%,100%{transform:rotate(-90deg)}}
+@media (orientation:portrait){body.cardboard #cbUI .cb-rot{display:flex}}
+#cbUI .cb-note{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(21,17,27,.85);color:#f4efe0;border-radius:12px;padding:8px 14px;font:600 13px/1.3 system-ui,sans-serif;opacity:0;transition:opacity .4s;pointer-events:none;max-width:80vw;text-align:center}
+#cbUI .cb-note.show{opacity:1}
+.cb-card{grid-column:1/-1;border-color:var(--cyan,#3fe0ff)}
+.tv .cb-watch{margin:12px 0 0}
+@media (max-width:760px){.cb-card{grid-column:auto}}
 .pad-focus{outline:4px solid var(--gold)!important;outline-offset:4px;box-shadow:0 0 0 8px rgba(255,201,60,.25)!important}
 #padToast{position:fixed;left:50%;top:18px;transform:translate(-50%,-140%);z-index:9999;background:rgba(21,17,27,.94);color:#f4efe0;border:2px solid var(--gold);border-radius:14px;padding:10px 18px;font:600 15px/1.3 system-ui,sans-serif;transition:transform .35s;pointer-events:none;max-width:92vw;text-align:center}#padToast.show{transform:translate(-50%,0)}
 .vr-card h3{display:flex;gap:10px;align-items:center}
@@ -526,9 +544,10 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
       <div class="hero-actions">
         <button class="btn" data-play="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4l14 8-14 8z" fill="currentColor"/></svg>Play Level 1</button>
         <a class="btn alt" href="#trailer"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M10 8l6 4-6 4z" fill="currentColor"/></svg>Watch trailer</a>
+        <button class="btn dark cb-only" data-cardboard="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 7h20v10h-7l-3-3.5L9 17H2z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="7" cy="11.5" r="1.8" fill="currentColor"/><circle cx="17" cy="11.5" r="1.8" fill="currentColor"/></svg>Play in Cardboard</button>
         <button class="btn dark vr-only" data-vr="0"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18v8h-6l-3-3-3 3H3z" fill="currentColor"/></svg>Play in VR</button>
       </div>
-      <div class="hero-note"><span><b>12</b> playable levels</span><span><b>Desktop</b> keyboard + mouse</span><span><b>Mobile</b> touch controls</span><span><b>VR</b> WebXR headsets</span><span><b>Gamepad</b> Xbox · PlayStation</span><span><b>4</b> difficulty tiers</span></div>
+      <div class="hero-note"><span><b>12</b> playable levels</span><span><b>Desktop</b> keyboard + mouse</span><span><b>Mobile</b> touch controls</span><span><b>VR</b> WebXR headsets</span><span><b>Gamepad</b> Xbox · PlayStation</span><span><b>Cardboard</b> phone VR</span><span><b>4</b> difficulty tiers</span></div>
     </div>
     <div class="hero-live" aria-hidden="true">
       <div class="live-chip"><i></i>LIVE · LEVEL 01 · CONCRETE CANVAS</div>
@@ -548,6 +567,7 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
           <source src="assets/hgf-promo.mp4" type="video/mp4">
         </video>
         <figcaption><span class="rec"></span>HUE'S GOT FLOW · THE COLORING ODYSSEY · VR VIDEO GAME</figcaption>
+        <button class="btn sm cb-only cb-watch" data-cbwatch>Watch in Cardboard</button>
       </figure>
       <div class="flyers">
         <button class="flyer" data-flyer="assets/flyer-quest.jpg" aria-label="Open the Meta Quest flyer"><img src="assets/flyer-quest.jpg" alt="Hue's Got Flow flyer: Hue with the Golden Pen, robot sidekicks and floating worlds, with 12 epic levels, multiple dimensions, special powers and an immersive VR experience" loading="lazy"><span>FLYER · META QUEST</span></button>
@@ -701,6 +721,21 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
         </div></div>
         <p class="pad-note">Pair the controller with Bluetooth or plug it in with USB, then press any button. Works in Chrome, Edge, Safari and Firefox on computers, phones and tablets, and in headset browsers that support controllers (such as Meta Quest Browser). In a headset, press Play in VR with your hand or headset controller first, then pick up the gamepad.</p>
       </div>
+      <div class="ctl-card cb-card">
+        <h3>GOOGLE CARDBOARD &amp; PHONE VR VIEWERS</h3>
+        <div class="pad-cols"><div>
+        <div class="ctl-row"><span class="keys"><kbd>LOOK</kbd></span><span>Turn your head to look around. You walk the way you are looking</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>TAP</kbd></span><span>Press the viewer button (or tap the screen) for an Ink Shot where you look</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>DOUBLE TAP</kbd></span><span>Jump · double tap again in the air to double jump</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>HOLD</kbd></span><span>Walk forward. Stand still near a wall or fuse to tag or fix it automatically</span></div>
+        </div><div>
+        <div class="ctl-row"><span class="keys"><kbd>LOOK DOWN</kbd></span><span>Opens the menu at your feet: turn, Dimension Bounce, special powers, sprint, Golden Pen and exit. Gaze at a button and tap, or keep looking for 1.5 s</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>DRAW</kbd></span><span>Pick DRAW, then hold the screen and trace the shape with your head</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>GAMEPAD</kbd></span><span>Pair an Xbox or PlayStation controller for full control in the viewer</span></div>
+        <div class="ctl-row"><span class="keys"><kbd>WATCH</kbd></span><span>Watch in Cardboard puts the trailer on a giant cinema screen. Tap to pause</span></div>
+        </div></div>
+        <p class="pad-note"><span class="cb-yes cb-only">Phone detected. Use Play in Cardboard at the top of the page or Watch in Cardboard under the trailer. </span>Works in Chrome and Samsung Internet on Android and Safari on iPhone (allow motion access when asked). Turn the phone sideways and slide it into any Cardboard-style viewer.</p>
+      </div>
       <div class="ctl-card vr-card">
         <h3>VR HEADSET <span class="vr-badge">WEBXR</span></h3>
         <div class="ctl-row"><span class="keys"><kbd>LEFT STICK</kbd></span><span>Move where you look · click the stick to toggle sprint</span></div>
@@ -713,7 +748,7 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
         <div class="ctl-row"><span class="keys"><kbd>B</kbd><kbd>Y</kbd><kbd>X</kbd></span><span>Use special · cycle special · Dimension Dash</span></div>
         <div class="ctl-row"><span class="keys"><kbd>WRIST</kbd></span><span>Look at your left wrist for health, FLOW, objective and the beat. Hold the left stick in for 1.5 s to leave VR.</span></div>
         <div class="ctl-row"><span class="keys"><button class="btn sm vrComfortBtn" data-comfort>VR: HIGH COMFORT</button></span><span>High comfort narrows your view while moving and turns in 45° snaps. Feeling queasy? Stay on High, take breaks and play seated.</span></div>
-        <p class="vr-note"><span class="vr-yes">Headset detected. Use Play in VR at the top of the page.</span><span class="vr-no">Open this page in a WebXR browser (such as the Meta Quest Browser) to see the Play in VR button.</span></p>
+        <p class="vr-note"><span class="vr-yes">Headset detected. Use Play in VR at the top of the page.</span><span class="vr-no">On a phone, use Play in Cardboard with any Cardboard-style viewer. For full VR, open this page in a WebXR browser (such as the Meta Quest Browser) to see the Play in VR button.</span></p>
       </div>
 
     </div>
@@ -903,7 +938,7 @@ body.master #rank b{background:linear-gradient(135deg,#fff2a8,#ffc93c,#e0a41c)}
     <div class="diff-pick sm"><div class="diff-head"><span class="kicker">Difficulty</span><b class="diffName">INK</b></div><div class="diffBtns"></div><p class="diffBlurb"></p></div>
     <div class="row lvl-jump"><button class="btn sm alt" data-jump="0">1</button><button class="btn sm alt" data-jump="1">2</button><button class="btn sm alt" data-jump="2">3</button><button class="btn sm alt" data-jump="3">4</button><button class="btn sm alt" data-jump="4">5</button><button class="btn sm alt" data-jump="5">6</button><button class="btn sm alt" data-jump="6">7</button><button class="btn sm alt" data-jump="7">8</button><button class="btn sm alt" data-jump="8">9</button><button class="btn sm alt" data-jump="9">10</button><button class="btn sm alt" data-jump="10">11</button><button class="btn sm alt" data-jump="11">12</button></div><div class="row"><button class="btn sm alt muteBtn">SOUND: ON</button></div>
     <div class="keys-list"><span><b>WASD</b> move</span><span><b>SPACE</b> jump · double jump</span><span><b>SHIFT</b> sprint</span><span><b>LMB / F</b> Ink Shot</span><span><b>E</b> hold to tag / use</span><span><b>RMB / C</b> draw with the pen</span><span><b>Q</b> Dimension Bounce</span><span><b>R</b> Sketch Shield (L5)</span><span><b>X</b> Time Scratch (L6)</span><span><b>V</b> Graffiti Construct (L7)</span><span><b>B</b> Beat Blast (L8)</span><span><b>Z</b> Flow State (L9)</span><span><b>SHIFT+Q</b> Dimension Dash (L10)</span><span><b>HOLD SPACE</b> glide (Hue Lv 2)</span><span><b>SPACE ×4</b> fly · hold to climb (Lv 5)</span><span><b>T</b> Paint Tornado (Lv 4)</span><span><b>H</b> Color Comet (Lv 6)</span><span><b>K</b> Crew Combo (Lv 8)</span><span><b>1 / 2</b> summon Brush / Dot · again = special</span><span><b>Y</b> World Painter (L11)</span><span><b>DRAW X</b> break ink barriers</span><span><b>M</b> mute</span><span><b>CONTROLLER</b> sticks move / look · A&#x2715; jump · RT ink · LT pen · X&#x25A1; use · B&#x25CB; bounce · Y&#x25B3; power · LB/RB pick power</span></div>
-    <div class="row"><button class="btn sm vr-only" data-vr="current">Continue in VR</button><button class="btn sm dark vr-only vrComfortBtn" data-comfort>VR: HIGH COMFORT</button><button class="btn sm alt" data-studio>Painter Studio</button><button class="btn sm dark" id="quitBtn">Quit to site</button></div>
+    <div class="row"><button class="btn sm vr-only" data-vr="current">Continue in VR</button><button class="btn sm cb-only" data-cardboard="current">Continue in Cardboard</button><button class="btn sm dark vr-only vrComfortBtn" data-comfort>VR: HIGH COMFORT</button><button class="btn sm alt" data-studio>Painter Studio</button><button class="btn sm dark" id="quitBtn">Quit to site</button></div>
   </div></div>
 
   <div class="overlay" id="complete" hidden><div class="panel">
@@ -5853,7 +5888,7 @@ const Game = (() => {
   document.addEventListener('pointerlockchange', () => {
     locked = document.pointerLockElement === canvas;
     if (locked) { dragLook = false; lockFails = 0; hud.lock.hidden = true; }
-    else if (state === 'playing' && !IS_TOUCH && !dragLook && !padOn) { if (!pen.active) togglePause(true); }
+    else if (state === 'playing' && !IS_TOUCH && !dragLook && !padOn && !CB.on) { if (!pen.active) togglePause(true); }
   });
   document.addEventListener('pointerlockerror', lockFailed);
   let dragStart = null, dragMoved = false;
@@ -6579,11 +6614,11 @@ const Game = (() => {
     if (active && !padOn) { padOn = true; if (state === 'playing') { hud.lock.hidden = true; if (document.pointerLockElement) document.exitPointerLock(); } }
     if (!padOn) return;
     // VIEW / SHARE: tap = mute, hold 1.5 s in VR = leave VR
-    if (pPressed(8)) { padViewHold += dt; if (VR.on && padViewHold > 1.5) { padViewHold = -99; renderer.xr.getSession()?.end(); } }
+    if (pPressed(8)) { padViewHold += dt; if (VR.on && padViewHold > 1.5) { padViewHold = -99; if (CB.on) G.exitCardboard(); else renderer.xr.getSession()?.end(); } }
     else { if (padViewHold > 0 && padViewHold < 0.5) toggleMute(); padViewHold = 0; }
     if (state === 'playing' && !player.dead) {
       if (padFocus) setPadFocus(null);
-      if (pEdge(9)) { togglePause(); if (VR.on) vrToast('PAUSED · MENU / OPTIONS to resume · hold VIEW to leave VR', 'hint'); pad.x = pad.y = 0; pad.jump = pad.fire = pad.use = false; return; }
+      if (pEdge(9)) { togglePause(); if (VR.on) vrToast('PAUSED · MENU / OPTIONS to resume · hold VIEW to leave ' + (CB.on ? 'Cardboard' : 'VR'), 'hint'); pad.x = pad.y = 0; pad.jump = pad.fire = pad.use = false; return; }
       padGame(dt);
     } else {
       pad.x = pad.y = 0; pad.jump = pad.fire = pad.use = false;
@@ -6600,6 +6635,11 @@ const Game = (() => {
   function frame() {
     const dt = Math.min(clock.getDelta(), 0.05);
     padPoll(dt);
+    if (CB.theater) { cbTheaterFrame(); return; }
+    if (CB.on) {
+      if (state === 'attract' || state === 'complete') cbExit();
+      else { cbHead(camera); tick(dt); cbRender(scene, camera); return; }
+    }
     if (renderer.xr.isPresenting) { tick(dt); renderer.render(scene, camera); return; }
     const inGame = state !== 'attract';
     if (!inGame && !heroVisible) return;
@@ -6614,7 +6654,7 @@ const Game = (() => {
       timeScale = damp(timeScale, pen.active ? 0.25 : 1, 10, dt);
       const gdt = dt * timeScale; gameTime += gdt;
       bounceCD -= dt;
-      if (VR.on) vrUpdate(dt);
+      if (VR.on) { vrUpdate(dt); if (CB.on) cbUpdate(dt); }
       if (!player.dead) updatePlayer(gdt);
       updateSpecials(gdt);
       L.enemies.forEach(e => e.update(gdt * (slowT > 0 ? 0.28 : 1), player));
@@ -6771,7 +6811,7 @@ const Game = (() => {
     document.body.classList.add('vr');
     hud.lock.hidden = true; hud.pause.hidden = true;
     vrToast(levelDef ? `LEVEL ${levelDef.id} · ${levelDef.name}` : 'VR', 'big');
-    setTimeout(() => VR.on && vrToast(`Left stick move (click to sprint) · right stick turn · A jump · right trigger fire · right grip draw · left trigger use · click right stick: comfort (${VR_COMFORT[VR.comfort].name})`, 'hint'), 2600);
+    setTimeout(() => VR.on && !CB.on && vrToast(`Left stick move (click to sprint) · right stick turn · A jump · right trigger fire · right grip draw · left trigger use · click right stick: comfort (${VR_COMFORT[VR.comfort].name})`, 'hint'), 2600);
   }
   function attachModel(inp) {
     if (inp.model) inp.obj.remove(inp.model);
@@ -6905,6 +6945,265 @@ const Game = (() => {
     return { VR, vig: vrVig, land: vrLand, comfort: VR_COMFORT, press: (hand, i, v = true) => { VR.inputs.find(x => x.hand === hand).gp.buttons[i].pressed = v; }, stick: (hand, x, y) => { const g = VR.inputs.find(x => x.hand === hand).gp; g.axes[2] = x; g.axes[3] = y; }, move: (hand, p) => VR.inputs.find(x => x.hand === hand).obj.position.copy(p), end: vrEnd };
   };
 
+  /* =========================================================
+     CARDBOARD / PHONE VR — split-screen stereo + gyro head tracking
+     Works on any phone in a Google Cardboard-style viewer (no WebXR needed).
+     Tap = Cardboard button. Look down = gaze menu. Gamepads work too.
+     ========================================================= */
+  const CB = { on: false, theater: false, ok: false, orient: null, gotSensor: false, yawOff: 0, recenter: true, my: 0, mp: 0,
+    down: null, taps: 0, lastTap: -9, drawArm: false, draw: null, menuOpen: false, hover: null, dwell: 0, fov0: 50, pr0: 1, wake: null, scrollY: 0 };
+  const cbStereo = new THREE.StereoCamera(); cbStereo.eyeSep = 0.062;
+  const _cbQ = new THREE.Quaternion(), _cbQY = new THREE.Quaternion(), _cbE = new THREE.Euler(), _cbZ = V3(0, 0, 1), _cbQ1 = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)), _cbQ0 = new THREE.Quaternion();
+  const _cbSz = new THREE.Vector2(), _cbP = V3(), _cbD = V3(), _cbRay = new THREE.Raycaster();
+  const cbNow = () => performance.now() / 1000;
+  // ---- detection: phones/tablets with motion sensors (or ?cardboard=1 to force it on)
+  const cbForced = /[?&]cardboard=1/.test(location.search);
+  CB.ok = cbForced || (IS_TOUCH && 'DeviceOrientationEvent' in window && Math.min(screen.width, screen.height) <= 1100);
+  document.body.classList.toggle('cb-ok', CB.ok);
+  addEventListener('deviceorientation', e => { if (e.alpha == null && e.beta == null) return; CB.orient = e; CB.gotSensor = true; });
+  // ---- overlay (divider, exit button, rotate-your-phone notice)
+  const cbUI = document.createElement('div'); cbUI.id = 'cbUI';
+  cbUI.innerHTML = '<div class="cb-mid"></div><button class="cb-x" aria-label="Leave Cardboard mode">✕ EXIT</button><div class="cb-rot"><b>Turn your phone sideways</b><span>then slide it into your Cardboard viewer</span></div><div class="cb-note"></div>';
+  document.body.appendChild(cbUI);
+  const cbNote = cbUI.querySelector('.cb-note');
+  function cbNoteShow(t, sec = 4) { cbNote.textContent = t; cbNote.classList.add('show'); clearTimeout(cbNoteShow.tm); cbNoteShow.tm = setTimeout(() => cbNote.classList.remove('show'), sec * 1000); }
+  cbUI.querySelector('.cb-x').addEventListener('click', e => { e.stopPropagation(); cbExit(); });
+  cbUI.addEventListener('pointerdown', e => { if (e.target.closest('.cb-x')) return; e.preventDefault(); CB.down = { t: cbNow(), x: e.clientX, y: e.clientY, id: e.pointerId, moved: false }; try { cbUI.setPointerCapture(e.pointerId); } catch (er) { } });
+  cbUI.addEventListener('pointermove', e => {
+    if (!CB.down || e.pointerId !== CB.down.id) return;
+    const dx = e.clientX - CB.down.x, dy = e.clientY - CB.down.y;
+    if (!CB.gotSensor && (CB.down.moved || Math.hypot(dx, dy) > 12)) { // no gyro: drag to look ("magic window")
+      CB.down.moved = true; CB.my += (e.movementX || 0) * 0.005; CB.mp = clamp(CB.mp + (e.movementY || 0) * 0.005, -1.4, 1.4);
+    }
+  });
+  const cbUp = e => { if (!CB.down || e.pointerId !== CB.down.id) return; const d = CB.down; CB.down = null; if (!d.moved && cbNow() - d.t < 0.25) CB.taps++; if (CB.draw) CB.drawEnd = true; };
+  cbUI.addEventListener('pointerup', cbUp); cbUI.addEventListener('pointercancel', cbUp);
+  cbUI.addEventListener('contextmenu', e => e.preventDefault());
+
+  // ---- head pose from the gyroscope (DeviceOrientation → quaternion), recentred on entry
+  function cbHead(target) {
+    const o = CB.orient;
+    if (o && CB.gotSensor) {
+      const d = THREE.MathUtils.DEG2RAD, sa = ((screen.orientation && screen.orientation.angle) ?? window.orientation ?? 0) * d;
+      _cbE.set((o.beta || 0) * d, (o.alpha || 0) * d, -(o.gamma || 0) * d, 'YXZ');
+      _cbQ.setFromEuler(_cbE).multiply(_cbQ1).multiply(_cbQ0.setFromAxisAngle(_cbZ, -sa));
+    } else _cbQ.setFromEuler(_cbE.set(-CB.mp, -CB.my, 0, 'YXZ'));
+    if (CB.recenter) { _cbE.setFromQuaternion(_cbQ, 'YXZ'); CB.yawOff = _cbE.y; CB.recenter = false; }
+    target.quaternion.copy(_cbQY.setFromAxisAngle(_up, -CB.yawOff)).multiply(_cbQ);
+  }
+  function cbRender(sc, cm) {
+    renderer.getSize(_cbSz); const w = _cbSz.x, h = _cbSz.y;
+    if (cm.fov !== 80 || Math.abs(cm.aspect - w / 2 / h) > 1e-3) { cm.fov = 80; cm.aspect = w / 2 / h; cm.updateProjectionMatrix(); }
+    sc.updateMatrixWorld(); cm.updateWorldMatrix(true, false); cbStereo.update(cm);
+    renderer.setScissorTest(true);
+    renderer.shadowMap.needsUpdate = true;
+    renderer.setScissor(0, 0, w / 2, h); renderer.setViewport(0, 0, w / 2, h); renderer.render(sc, cbStereo.cameraL);
+    renderer.setScissor(w / 2, 0, w / 2, h); renderer.setViewport(w / 2, 0, w / 2, h); renderer.render(sc, cbStereo.cameraR);
+    renderer.setScissorTest(false); renderer.setViewport(0, 0, w, h);
+  }
+
+  // ---- gaze reticle (in both eyes) and gaze menu (look down)
+  const cbReticle = new THREE.Mesh(new THREE.RingGeometry(0.018, 0.03, 32), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85, depthTest: false, depthWrite: false, toneMapped: false }));
+  cbReticle.renderOrder = 1001; cbReticle.position.z = -2;
+  const cbFill = new THREE.Mesh(new THREE.RingGeometry(0.034, 0.048, 32, 1, Math.PI / 2, 0.001), new THREE.MeshBasicMaterial({ color: 0xffc93c, transparent: true, depthTest: false, depthWrite: false, toneMapped: false }));
+  cbFill.renderOrder = 1002; cbReticle.add(cbFill);
+  function cbSetFill(f) { cbFill.geometry.dispose(); cbFill.geometry = new THREE.RingGeometry(0.034, 0.048, 32, 1, Math.PI / 2, Math.max(0.001, -f * TAU)); }
+  const cbMenu = new THREE.Group(); cbMenu.visible = false;
+  const CB_BTNS = [
+    ['turnL', '◀ TURN'], ['bounce', 'BOUNCE'], ['power', 'POWER'], ['turnR', 'TURN ▶'],
+    ['draw', 'DRAW'], ['next', 'NEXT POWER'], ['sprint', 'SPRINT: OFF'], ['exit', 'EXIT']
+  ];
+  const cbBtnMeshes = CB_BTNS.map(([id, label], i) => {
+    const c = document.createElement('canvas'); c.width = 384; c.height = 160;
+    const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace;
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(0.25, 0.104), new THREE.MeshBasicMaterial({ map: t, transparent: true, depthTest: false, depthWrite: false, toneMapped: false }));
+    m.renderOrder = 998; m.userData = { id, label, c, t, hot: false };
+    m.position.set(((i % 4) - 1.5) * 0.27, (i < 4 ? 0.06 : -0.06), 0); cbMenu.add(m); return m;
+  });
+  function cbDrawBtn(m) {
+    const { c, t, label, hot } = m.userData, g = c.getContext('2d');
+    g.clearRect(0, 0, c.width, c.height);
+    g.fillStyle = hot ? '#ffc93c' : 'rgba(21,17,27,.92)'; g.beginPath(); g.roundRect(6, 6, c.width - 12, c.height - 12, 30); g.fill();
+    g.strokeStyle = hot ? '#fff' : '#ffc93c'; g.lineWidth = 6; g.stroke();
+    g.fillStyle = hot ? '#15111b' : '#f4efe0'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    let fs = 46; g.font = `${fs}px Bungee, Impact, sans-serif`; while (g.measureText(label).width > c.width - 40 && fs > 20) { fs -= 2; g.font = `${fs}px Bungee, Impact, sans-serif`; }
+    g.fillText(label, c.width / 2, c.height / 2 + 2); t.needsUpdate = true;
+  }
+  function cbLabels() {
+    const specs = SPECIALS.filter(k => unlocked[k]); const k = specs[VR.sel % Math.max(1, specs.length)];
+    for (const m of cbBtnMeshes) {
+      const id = m.userData.id; let l = m.userData.label;
+      if (id === 'power') l = k ? String(POWERS.find(p => p[0] === k)?.[2] || k).toUpperCase() : 'NO POWERS';
+      if (id === 'sprint') l = VR.sprint ? 'SPRINT: ON' : 'SPRINT: OFF';
+      if (id === 'draw') l = CB.drawArm ? 'DRAW: READY' : 'DRAW';
+      m.userData.label = l; cbDrawBtn(m);
+    }
+  }
+  function cbOpenMenu() {
+    // world-locked in front of you, below eye level, facing your eyes
+    camera.getWorldPosition(_cbP); camera.getWorldDirection(_cbD); _cbD.y = 0; if (_cbD.lengthSq() < 1e-4) _cbD.set(0, 0, -1); _cbD.normalize();
+    VR.rig.updateMatrixWorld(true);
+    const wp = _cbP.clone().addScaledVector(_cbD, 0.7); wp.y -= 0.82;
+    cbMenu.position.copy(VR.rig.worldToLocal(wp.clone()));
+    cbMenu.lookAt(_cbP); // Object3D.lookAt already compensates for the rig's rotation
+    vrHud.m.position.set(0, 0.25, 0); vrHud.m.rotation.set(0, 0, 0); vrHud.m.scale.setScalar(1.5); cbMenu.add(vrHud.m);
+    cbLabels(); cbMenu.visible = true; CB.menuOpen = true; CB.menuYaw = VR.rig.rotation.y;
+  }
+  function cbCloseMenu(acted) { cbMenu.visible = false; CB.menuOpen = false; cbSetHover(null); if (acted) CB.needUp = true; }
+  function cbSetHover(m) { if (CB.hover === m) return; if (CB.hover) { CB.hover.userData.hot = false; cbDrawBtn(CB.hover); } CB.hover = m; CB.dwell = 0; cbSetFill(0); if (m) { m.userData.hot = true; cbDrawBtn(m); } }
+  function cbAct(id) {
+    Audio.play && Audio.play('collect');
+    if (id === 'turnL') { VR.yaw += Math.PI / 4; VR.blink = Math.max(VR.blink, 0.8); cbCloseMenu(true); }
+    else if (id === 'turnR') { VR.yaw -= Math.PI / 4; VR.blink = Math.max(VR.blink, 0.8); cbCloseMenu(true); }
+    else if (id === 'bounce') { bounce(); cbCloseMenu(true); }
+    else if (id === 'power') { const specs = SPECIALS.filter(k => unlocked[k]); if (specs.length) { useSpecial(specs[VR.sel % specs.length]); cbCloseMenu(true); } else vrToast('NO SPECIAL POWERS YET', 'warn'); }
+    else if (id === 'next') { const specs = SPECIALS.filter(k => unlocked[k]); if (specs.length) { VR.sel = (VR.sel + 1) % specs.length; } cbLabels(); }
+    else if (id === 'sprint') { VR.sprint = !VR.sprint; cbLabels(); }
+    else if (id === 'draw') { if (!unlocked.pen) { vrToast('YOU NEED THE GOLDEN PEN', 'warn'); return; } CB.drawArm = true; cbCloseMenu(true); vrToast('Look up ahead, then HOLD the screen and draw the shape with your head', 'hint'); }
+    else if (id === 'exit') cbExit();
+  }
+
+  // ---- per-frame gameplay input (runs right after vrUpdate, which clears VR.move/use)
+  function cbUpdate(dt) {
+    const t = cbNow(); const holding = CB.down && !CB.down.moved && t - CB.down.t > 0.25;
+    camera.getWorldDirection(_cbD); const pitch = Math.asin(clamp(_cbD.y, -1, 1));
+    // menu open/close with hysteresis
+    if (pitch > -0.45) CB.needUp = false;
+    if (!CB.menuOpen && pitch < -0.72 && !CB.draw && !holding && !CB.needUp) cbOpenMenu();
+    else if (CB.menuOpen && (pitch > -0.3 || Math.abs(VR.rig.rotation.y - CB.menuYaw) > 0.01)) cbCloseMenu();
+    let hit = null;
+    if (CB.menuOpen) {
+      camera.getWorldPosition(_cbP); _cbRay.set(_cbP, _cbD); cbMenu.updateMatrixWorld(true);
+      const hs = _cbRay.intersectObjects(cbBtnMeshes, false); hit = hs.length ? hs[0].object : null;
+      cbSetHover(hit);
+      if (hit && hit === CB.dwellLock) { cbSetFill(0); } else if (hit) { CB.dwellLock = null; CB.dwell += dt; cbSetFill(Math.min(1, CB.dwell / 1.5)); if (CB.dwell >= 1.5) { const id = hit.userData.id; cbSetHover(null); CB.dwellLock = hit; cbAct(id); } } else CB.dwellLock = null;
+      cbReticle.scale.setScalar(hit ? 1.5 : 1);
+    } else { cbReticle.scale.setScalar(1); if (CB.hover) cbSetHover(null); }
+    // taps = the Cardboard button
+    while (CB.taps > 0) {
+      CB.taps--;
+      if (CB.menuOpen) { if (CB.hover) { const id = CB.hover.userData.id; cbSetHover(null); cbAct(id); } continue; }
+      if (CB.drawArm) continue;
+      if (t - CB.lastTap < 0.33) { jumpPressed = true; CB.lastTap = -9; }
+      else { CB.lastTap = t; camera.getWorldPosition(_cbP); shoot(_cbP.clone().addScaledVector(_cbD, 0.3), _cbD.clone()); }
+    }
+    // head-drawn pen gestures
+    if (CB.drawArm && holding && !CB.draw) {
+      camera.getWorldPosition(_cbP); _cbE.setFromQuaternion(camera.getWorldQuaternion(_cbQ), 'YXZ');
+      CB.draw = { y0: _cbE.y, p0: _cbE.x, o: _cbP.clone().addScaledVector(_cbD, 1.6), r: V3(1, 0, 0).applyQuaternion(_cbQ), u: V3(0, 1, 0).applyQuaternion(_cbQ), flat: [], world: [] };
+      pen.active = true; Audio.penHum(true, 2);
+    }
+    if (CB.draw) {
+      const d = CB.draw; _cbE.setFromQuaternion(camera.getWorldQuaternion(_cbQ), 'YXZ');
+      let dy = _cbE.y - d.y0; while (dy > Math.PI) dy -= TAU; while (dy < -Math.PI) dy += TAU;
+      const x = -dy * 1.6 * 900, y = -(_cbE.x - d.p0) * 1.6 * 900; // pixels on a virtual canvas 1.6 m away
+      const last = d.flat[d.flat.length - 1]; if (!last || Math.hypot(x - last.x, y - last.y) > 3) { d.flat.push({ x, y }); d.world.push(d.o.clone().addScaledVector(d.r, x / 900).addScaledVector(d.u, -y / 900)); }
+      if (trail && d.world.length > 1) { trail.geometry.setFromPoints(d.world); trail.visible = true; }
+      if (CB.drawEnd || !CB.down) {
+        CB.draw = null; CB.drawEnd = false; CB.drawArm = false; pen.active = false; Audio.penHum(false);
+        if (d.flat.length > 4) { castGesture(Gesture.classify(d.flat)); if (pen.resultT > 0) vrToast(pen.result, pen.result.includes('·') ? 'big' : 'warn'); }
+        setTimeout(() => { if (trail) trail.visible = false; }, 500);
+      }
+    }
+    CB.drawEnd = false;
+    // hold = walk where you look; stand still near something to use it automatically
+    if (holding && !CB.drawArm && !CB.draw && !CB.menuOpen) VR.move.y = -1;
+    if (!holding && curInteract && Math.hypot(VR.move.x, VR.move.y) < 0.15 && Math.hypot(pad.x, pad.y) < 0.1) VR.use = true;
+  }
+
+  // ---- enter / exit
+  function cbCommonEnter() {
+    // must run inside the tap/click: iOS motion permission, fullscreen, landscape lock, keep screen awake
+    try { if (typeof DeviceOrientationEvent !== 'undefined' && DeviceOrientationEvent.requestPermission) DeviceOrientationEvent.requestPermission().catch(() => { }); } catch (e) { }
+    try { const de = document.documentElement; const r = de.requestFullscreen ? de.requestFullscreen({ navigationUI: 'hide' }) : de.webkitRequestFullscreen && de.webkitRequestFullscreen(); r && r.then && r.then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape').catch(() => { })).catch(() => { }); } catch (e) { }
+    try { navigator.wakeLock && navigator.wakeLock.request('screen').then(w => CB.wake = w).catch(() => { }); } catch (e) { }
+    CB.scrollY = scrollY; CB.recenter = true; CB.my = CB.mp = 0; CB.taps = 0; CB.down = null;
+    CB.pr0 = renderer.getPixelRatio(); renderer.setPixelRatio(Math.min(devicePixelRatio, 1.3));
+    renderer.shadowMap.autoUpdate = false;
+    document.body.classList.add('cardboard'); resize();
+    setTimeout(() => { if ((CB.on || CB.theater) && !CB.gotSensor) cbNoteShow('No motion sensor found, so drag on the screen to look around.', 6); }, 1500);
+  }
+  function cbCommonExit() {
+    renderer.setPixelRatio(CB.pr0); renderer.shadowMap.autoUpdate = true; renderer.setScissorTest(false);
+    document.body.classList.remove('cardboard');
+    try { if (document.fullscreenElement) document.exitFullscreen(); else if (document.webkitFullscreenElement) document.webkitExitFullscreen(); } catch (e) { }
+    try { CB.wake && CB.wake.release(); } catch (e) { } CB.wake = null;
+    camera.fov = CB.fov0; resize(); scrollTo(0, CB.scrollY);
+  }
+  G.enterCardboard = lvl => {
+    if (CB.on || renderer.xr.isPresenting) return;
+    CB.fov0 = camera.fov;
+    cbCommonEnter();
+    if (lvl != null || state === 'attract' || state === 'complete') G.play(lvl ?? 0);
+    else if (state === 'paused') togglePause();
+    releaseLock(); hud.lock.hidden = true;
+    CB.on = true; vrStart();
+    camera.position.set(0, 1.6, 0); camera.add(cbReticle); VR.rig.add(cbMenu);
+    CB.drawArm = false; CB.draw = null; cbCloseMenu();
+    setTimeout(() => CB.on && vrToast('Tap = Ink Shot · double tap = jump · hold = walk where you look · look down for the menu', 'hint'), 2600);
+  };
+  function cbExit() {
+    if (CB.theater) { cbTheaterExit(); return; }
+    if (!CB.on) return;
+    CB.on = false; cbCloseMenu(); camera.remove(cbReticle); VR.rig.remove(cbMenu); vrHud.m.scale.setScalar(1);
+    if (CB.draw) { CB.draw = null; pen.active = false; Audio.penHum(false); }
+    vrEnd(); cbCommonExit();
+    if (state === 'playing') togglePause(true);
+  }
+  G.exitCardboard = cbExit;
+
+  // ---- Watch mode: the trailer on a curved cinema screen
+  let thScene = null, thCam = null, thVid = null, thMsg = null;
+  function thBuild() {
+    thScene = new THREE.Scene(); thScene.background = new THREE.Color(0x0b0810);
+    thCam = new THREE.PerspectiveCamera(80, 1, 0.05, 200); thCam.position.set(0, 1.6, 0); thScene.add(thCam);
+    thVid = document.createElement('video'); thVid.src = 'assets/hgf-promo.mp4'; thVid.playsInline = true; thVid.setAttribute('playsinline', ''); thVid.setAttribute('webkit-playsinline', ''); thVid.loop = true; thVid.preload = 'auto';
+    const vt = new THREE.VideoTexture(thVid); vt.colorSpace = THREE.SRGBColorSpace; vt.wrapS = THREE.RepeatWrapping; vt.repeat.x = -1; // inside of the curved screen: un-mirror
+    const R = 6.5, H = 4.4, arc = (H * 16 / 9) / R;
+    const scr = new THREE.Mesh(new THREE.CylinderGeometry(R, R, H, 48, 1, true, Math.PI - arc / 2, arc), new THREE.MeshBasicMaterial({ map: vt, side: THREE.BackSide, toneMapped: false }));
+    scr.position.y = 2.3; thScene.add(scr);
+    const frameM = new THREE.MeshBasicMaterial({ color: 0xffc93c, toneMapped: false });
+    for (const y of [2.3 + H / 2 + 0.06, 2.3 - H / 2 - 0.06]) { const b = new THREE.Mesh(new THREE.CylinderGeometry(R + 0.02, R + 0.02, 0.06, 48, 1, true, Math.PI - arc / 2, arc), new THREE.MeshBasicMaterial({ color: 0xffc93c, side: THREE.BackSide, toneMapped: false })); b.position.y = y; thScene.add(b); }
+    const floor = new THREE.Mesh(new THREE.CircleGeometry(14, 48), new THREE.MeshBasicMaterial({ color: 0x15111b })); floor.rotation.x = -Math.PI / 2; thScene.add(floor);
+    const glow = new THREE.Mesh(new THREE.RingGeometry(6.6, 7.4, 64, 1, Math.PI / 2 - arc / 2 - 0.1, arc + 0.2), new THREE.MeshBasicMaterial({ color: 0x3a2050, transparent: true, opacity: 0.6, toneMapped: false })); glow.rotation.x = -Math.PI / 2; glow.position.y = 0.01; thScene.add(glow);
+    // seat rows and aisle lights
+    const seatM = new THREE.MeshBasicMaterial({ color: 0x2a1f36 }), seatG = new THREE.BoxGeometry(0.55, 0.5, 0.5);
+    const cols = [0xff3c9a, 0x3fe0ff, 0xffc93c, 0x7cf27c];
+    for (let r = 0; r < 3; r++) for (let i = -5; i <= 5; i++) {
+      if (r === 1 && Math.abs(i) < 1) continue;
+      const s = new THREE.Mesh(seatG, seatM); const a = i * 0.13, rr = 2.2 + r * 1.1; s.position.set(Math.sin(a) * rr, 0.25 + r * 0.25, Math.cos(a) * rr); s.lookAt(0, s.position.y, -R); thScene.add(s);
+    }
+    for (let i = 0; i < 24; i++) { const a = (i / 24) * TAU; const l = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), new THREE.MeshBasicMaterial({ color: cols[i % 4], toneMapped: false })); l.position.set(Math.sin(a) * 9, 0.08, Math.cos(a) * 9); thScene.add(l); }
+    // title sign above the screen and a status message under it
+    const mk = (w, h, pw, ph) => { const c = document.createElement('canvas'); c.width = w; c.height = h; const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; const m = new THREE.Mesh(new THREE.PlaneGeometry(pw, ph), new THREE.MeshBasicMaterial({ map: t, transparent: true, toneMapped: false })); return { c, g: c.getContext('2d'), t, m }; };
+    const sign = mk(1024, 160, 6, 0.94); sign.g.font = '84px Bungee, Impact, sans-serif'; sign.g.textAlign = 'center'; sign.g.textBaseline = 'middle'; sign.g.fillStyle = '#ffc93c'; sign.g.fillText("HUE'S GOT FLOW", 512, 70); sign.g.font = '34px Bungee, Impact, sans-serif'; sign.g.fillStyle = '#f4efe0'; sign.g.fillText('THE COLORING ODYSSEY · OFFICIAL TRAILER', 512, 134); sign.t.needsUpdate = true;
+    sign.m.position.set(0, 2.3 + H / 2 + 0.75, -R + 0.4); thScene.add(sign.m);
+    thMsg = mk(1024, 140, 3.2, 0.44); thMsg.m.position.set(0, 0.55, -3); thMsg.m.rotation.x = -0.35; thScene.add(thMsg.m);
+    thCam.add(cbReticle.clone());
+  }
+  function thSay(text) { const { g, c, t } = thMsg; g.clearRect(0, 0, c.width, c.height); g.fillStyle = 'rgba(21,17,27,.85)'; g.beginPath(); g.roundRect(6, 6, c.width - 12, c.height - 12, 34); g.fill(); g.strokeStyle = '#ffc93c'; g.lineWidth = 5; g.stroke(); g.fillStyle = '#f4efe0'; g.font = '40px Bungee, Impact, sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, c.width / 2, c.height / 2 + 2); t.needsUpdate = true; }
+  G.cardboardWatch = () => {
+    if (CB.on || CB.theater || renderer.xr.isPresenting) return;
+    if (!thScene) thBuild();
+    CB.fov0 = camera.fov; CB.theater = true; cbCommonEnter();
+    const pv = document.getElementById('promoVid'); if (pv && !pv.paused) pv.pause();
+    Audio.duck && Audio.duck(0);
+    thVid.currentTime = 0; const p = thVid.play(); p && p.catch && p.catch(() => thSay('TAP TO PLAY'));
+    thSay('TAP: PAUSE / PLAY · DOUBLE TAP: RESTART');
+  };
+  function cbTheaterExit() { CB.theater = false; thVid && thVid.pause(); Audio.duck && Audio.duck(0.8); cbCommonExit(); }
+  function cbTheaterFrame() {
+    cbHead(thCam);
+    const t = cbNow();
+    while (CB.taps > 0) {
+      CB.taps--;
+      if (t - CB.lastTap < 0.33) { CB.lastTap = -9; thVid.currentTime = 0; thVid.play().catch(() => { }); thSay('RESTARTED'); }
+      else { CB.lastTap = t; if (thVid.paused) { thVid.play().catch(() => { }); thSay('PLAYING · TAP TO PAUSE'); } else { thVid.pause(); thSay('PAUSED · TAP TO PLAY'); } }
+    }
+    cbRender(thScene, thCam);
+  }
+  G.cbDebug = () => ({ CB, cbMenu, cbBtnMeshes, cbAct, thVid: () => thVid, step: (n, dt = 1 / 30) => { for (let i = 0; i < n; i++) { cbHead(camera); tick(dt); } } });
+
   G.init = async () => {
     try { await Promise.race([Promise.all(['Bungee', 'Permanent Marker', 'Rye'].map(f => document.fonts.load(`40px "${f}"`))), new Promise(r => setTimeout(r, 2500))]); } catch (e) {}
     buildTextures(); buildMaterials(); resize();
@@ -6966,6 +7265,9 @@ Game.renderDiff(); Game.renderExtras();
 document.addEventListener('click', e => {
   const df = e.target.closest('[data-diff]');
   if (df) { e.preventDefault(); Game.setDiff(+df.dataset.diff); return; }
+  const cbb = e.target.closest('[data-cardboard]');
+  if (cbb) { e.preventDefault(); Game.enterCardboard(cbb.dataset.cardboard === 'current' ? null : +cbb.dataset.cardboard); return; }
+  if (e.target.closest('[data-cbwatch]')) { e.preventDefault(); Game.cardboardWatch(); return; }
   const vr = e.target.closest('[data-vr]');
   if (vr) { e.preventDefault(); Game.enterVR(vr.dataset.vr === 'current' ? null : +vr.dataset.vr); return; }
   const xt = e.target.closest('[data-xtoggle]'); if (xt) { e.preventDefault(); Extras.toggle(xt.dataset.xtoggle); return; }
